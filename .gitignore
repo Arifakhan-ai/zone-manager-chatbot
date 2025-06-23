@@ -1,0 +1,36 @@
+# Environment and secrets
+.env
+deploy.sh
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+ford-llm/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+.DS_Store?
+
+# Logs
+*.log
+
+# Development files
+test*.py
+check.py
+*_test.py
+*.ipynb
+
+# Large database files
+*.db
+zone_manager_multitable.db

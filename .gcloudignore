@@ -1,0 +1,13 @@
+.env
+.git/
+__pycache__/
+*.pyc
+.DS_Store
+venv/
+ford-llm/
+.vscode/
+.idea/
+test1.py
+*.log
+.gitignore
+README.md

@@ -1,0 +1,62 @@
+﻿table_name,column_name,data_type,is_nullable,column_description
+dealers,dealer_key,INTEGER,NULLABLE,A unique integer identifier for each dealer record in the table.
+dealers,dealer_code,STRING,NULLABLE,An internal code used to uniquely identify each dealer within the organization.
+dealers,dealer_name,STRING,NULLABLE,"The full name of the dealer, providing a human-readable identifier."
+dealers,district_code,STRING,NULLABLE,An internal code representing the district to which the dealer belongs.
+dealers,district_name,STRING,NULLABLE,The name of the district in which the dealer operates.
+dealers,zone_code,STRING,NULLABLE,An internal code representing the zone in which the dealer operates.
+dealers,zone_name,STRING,NULLABLE,The name of the zone in which the dealer operates.
+dealers,brand_name,STRING,NULLABLE,The brand or brands that the dealer represents.
+dealers,dealer_location_type,STRING,NULLABLE,"A descriptor of the dealer's location type (urban, suburban, or rural)."
+dealers,sales_area,STRING,NULLABLE,A descriptor of the sales area assigned to the dealer.
+dealers,dealer_category,STRING,NULLABLE,"A classification of the dealer based on size, sales volume, or service level."
+dealers,objective_month,DATE,NULLABLE,The month and year for which the sales objective is set.
+dealers,objective,INTEGER,NULLABLE,"The numerical target set for the dealer, representing the sales goal."
+dealers,objective_group,STRING,NULLABLE,"A descriptive label for each objective group such as Cars, SUVs, or Trucks."
+specifications,specification_key,INTEGER,NULLABLE,A unique integer identifier for each vehicle specification entry.
+specifications,specification_label,STRING,NULLABLE,A descriptive label summarizing the key features or configuration of a vehicle.
+specifications,brand_name,STRING,NULLABLE,"The brand name of the vehicle, such as ""Ford."""
+specifications,nameplate_code,STRING,NULLABLE,An internal code representing the vehicle's nameplate.
+specifications,nameplate,STRING,NULLABLE,"The full nameplate of the vehicle, such as ""Ford Ranger."""
+specifications,segment,STRING,NULLABLE,"The market segment of the vehicle (e.g., Commercial or Passenger Vehicle)."
+specifications,model_year,STRING,NULLABLE,The model year of the vehicle.
+specifications,vista_mpv_key,STRING,NULLABLE,An identifier related to the VISTA system.
+specifications,vista_entity_code,STRING,NULLABLE,Another identifier from the VISTA system.
+specifications,body_style_code,STRING,NULLABLE,An internal code representing the vehicle's body style.
+specifications,body_style,STRING,NULLABLE,A descriptive term for the vehicle's body style.
+specifications,series_code,STRING,NULLABLE,An internal code representing the vehicle series.
+specifications,subseries_code,STRING,NULLABLE,An internal code representing a subseries within a vehicle series.
+specifications,series,STRING,NULLABLE,A descriptive term for the vehicle series.
+specifications,engine_code,STRING,NULLABLE,An internal code representing the type of engine in the vehicle.
+specifications,engine,STRING,NULLABLE,A descriptive term for the vehicle's engine.
+specifications,drive_code,STRING,NULLABLE,An internal code representing the vehicle's drivetrain.
+specifications,transmission_code,STRING,NULLABLE,An internal code representing the vehicle's transmission type.
+specifications,transmission,STRING,NULLABLE,A descriptive term for the vehicle's transmission.
+specifications,colour_code,STRING,NULLABLE,An internal code representing the vehicle's exterior color.
+specifications,colour,STRING,NULLABLE,A descriptive term for the vehicle's exterior color.
+specifications,trim_code,STRING,NULLABLE,An internal code representing the vehicle's trim level.
+specifications,trim,STRING,NULLABLE,A descriptive term for the vehicle's trim level.
+specifications,option_codes,STRING,NULLABLE,A string containing codes that represent additional options included with this vehicle specification.
+specifications,options,STRING,NULLABLE,A descriptive term for the vehicle's options.
+specifications,allocation_group_key,INTEGER,NULLABLE,A foreign key that links to an allocation group.
+specifications,objective_group,STRING,NULLABLE,"A descriptive label for each objective group such as Cars, SUVs, or Trucks."
+vehicles,vehicle_key,INTEGER,NULLABLE,A unique integer identifier for each vehicle record in the table.
+vehicles,dealer_key,INTEGER,NULLABLE,A foreign key referencing the dealers table.
+vehicles,invoiced_dealer_key,INTEGER,NULLABLE,"A foreign key referencing the dealers table, indicating the dealer that invoiced the customer."
+vehicles,specification_key,INTEGER,NULLABLE,A foreign key referencing the specifications table.
+vehicles,vin,STRING,NULLABLE,The Vehicle Identification Number (VIN).
+vehicles,orbit_number,INTEGER,NULLABLE,An internal tracking number used within the organization.
+vehicles,vista_nsc_order_number,STRING,NULLABLE,An order number from the VISTA system.
+vehicles,vista_dealer_order_number,STRING,NULLABLE,A dealer-specific order number within the VISTA system.
+vehicles,vehicle_status,STRING,NULLABLE,"The current status of the vehicle (e.g., ""Ordered,"" ""In Transit,"" ""Sold"")."
+vehicles,ordered_date,DATE,NULLABLE,The date the vehicle was ordered from the manufacturer.
+vehicles,gate_release_date,DATE,NULLABLE,The date the vehicle was released from the manufacturer's facility.
+vehicles,original_dealer_invoice_date,DATE,NULLABLE,The date the vehicle was originally invoiced to a dealer.
+vehicles,dealer_invoice_date,DATE,NULLABLE,The date the vehicle was invoiced to the dealer that ultimately sold it.
+vehicles,dealer_delivery_date,DATE,NULLABLE,The date the vehicle was physically delivered to the dealer.
+vehicles,estimated_dealer_delivery_date,DATE,NULLABLE,The estimated date for delivery to the dealer.
+vehicles,retail_processed_date,DATE,NULLABLE,The date the vehicle's retail sale was completed.
+vehicles,warranty_start_date,DATE,NULLABLE,The start date of the vehicle's warranty period.
+vehicles,days_in_current_dealer_stock,INTEGER,NULLABLE,The number of days the vehicle has been in the inventory of the current dealer.
+vehicles,total_days_in_dealer_stock,INTEGER,NULLABLE,The total number of days the vehicle has spent in dealer inventory.
+vehicles,retail_volume,INTEGER,NULLABLE,"A field indicating whether a vehicle has been sold at retail (1 for sold, 0 otherwise)."
