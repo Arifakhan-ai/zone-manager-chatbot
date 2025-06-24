@@ -23,12 +23,13 @@ from typing import List
 from langchain_community.tools import QuerySQLDatabaseTool
 from langfuse import Langfuse
 from langfuse.langchain import CallbackHandler
-import pandas as pd
-import os
 from fordllm.utils import TokenFetcher
 from openai import OpenAI
 import os
+from fordllm.utils import TokenFetcher
 import streamlit as st
+
+
 
 # Streamlit page configuration
 st.set_page_config(
@@ -395,6 +396,23 @@ table_prompt = ChatPromptTemplate.from_messages([
     ("human", "{input}")
 ])
 
+def is_ford_related(question: str) -> bool:
+    # Rename to avoid conflict with chat input 'prompt'
+    prompt_template = ChatPromptTemplate.from_messages([
+        ("system", "You're a classification assistant. Respond with 'Yes' or 'No' only. Is the following question related to Ford dealership data like sales, objectives, VINs, or nameplates?"),
+        ("human", "{question}")
+    ])
+    # Add Ford API configuration
+    classifier_llm = ChatOpenAI(
+        model="gpt-4.1",
+        openai_api_base="https://api.pivpn.core.ford.com/fordllmapi/api/v1",
+        openai_api_key=token_fetcher.token,
+        temperature=0
+    )
+    result = classifier_llm.invoke(prompt_template.format_messages(question=question)).content.strip().lower()
+    return result == "yes"
+
+
 # Apply `with_structured_output` correctly
 try:
     structured_llm = llm.with_structured_output(TableList)
@@ -483,23 +501,28 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Accept user input
-if prompt := st.chat_input("Ask me anything about your vehicle data..."):
-    # Add user message to chat history
+
+if prompt := st.chat_input("What is up?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    
-    # Display user message
     with st.chat_message("user"):
         st.markdown(prompt)
-    
-    # Generate assistant response
+
     with st.spinner("Generating response..."):
         with st.chat_message("assistant"):
-            response = invoke_chain(prompt, st.session_state.messages, examples)
+            if is_ford_related(prompt):
+                response = invoke_chain(prompt, st.session_state.messages, examples)
+            else:
+                general_llm = ChatOpenAI(
+                    model="gpt-4.1", 
+                    openai_api_base="https://api.pivpn.core.ford.com/fordllmapi/api/v1",
+                    openai_api_key=token_fetcher.token,
+                    temperature=0
+                )
+                response = general_llm.invoke(prompt).content
             st.markdown(response)
-    
-    # Add assistant response to chat history
+
     st.session_state.messages.append({"role": "assistant", "content": response})
+
 
 # Sidebar with app information
 with st.sidebar:
